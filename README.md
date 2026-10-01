@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teatro Municipal Rosita Ávila
 
-## Getting Started
-
-First, run the development server:
+Sitio de cartelera del Teatro Rosita Ávila (Municipalidad de San Miguel de Tucumán).
+Stack: Next.js 16 (App Router) · Tailwind CSS 4 · Supabase · Vercel. Usar **pnpm**.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cómo funcionan los eventos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Los eventos **no se cargan a mano**: salen de la ticketera oficial, [entradas.smt.gob.ar](https://entradas.smt.gob.ar)
+(plataforma Aplausos), y el botón "Comprar" lleva a `entradas.smt.gob.ar/shows/{id}`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `lib/aplausos.ts`: cliente de la API `onlinesales-api.aplausos.com.ar`. El tenant se resuelve por el header
+  `Origin`, por eso se consume **sólo desde el servidor**. Cache de 5 minutos (ISR).
+- `lib/events.ts`: arma el modelo `TheaterEvent` (precios, estado, funciones futuras) y aplica los ajustes de Supabase.
+- `supabase/schema.sql`: tabla `event_overrides` para **ocultar** shows que no son en el teatro (la ticketera
+  también vende eventos de otros lugares), **destacar** uno en el hero o reemplazar la descripción.
 
-## Learn More
+Sin variables de Supabase el sitio funciona igual y muestra todos los shows de la ticketera.
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/            páginas: inicio, /eventos, /eventos/[slug], /el-teatro, /contacto, sitemap y robots
+components/     header, footer, cards y secciones de la home
+lib/site.ts     datos institucionales (dirección, teléfono, redes; los TODO faltan confirmar)
+```

@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Paleta institucional del Rosita Ávila: azul (brand) y celeste (accent) sobre noche azulada. */
+@theme {
+  --color-background: #070b16;
+  --color-surface: #0d1424;
+  --color-surface-2: #131c31;
+  --color-border: #1f2b45;
+  --color-foreground: #eef3fb;
+  --color-muted: #94a3bf;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-brand-300: #8fb0f7;
+  --color-brand-400: #3f73e6;
+  --color-brand-500: #2556c9;
+  --color-brand-600: #1c43a3;
+  --color-brand-700: #15327a;
+  --color-brand-900: #0a1838;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-accent-200: #c9eeff;
+  --color-accent-300: #7dd3fc;
+  --color-accent-400: #38bdf8;
+  --color-accent-500: #0ea5e9;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-spot: spot 6s ease-in-out infinite;
+  --animate-ken-burns: ken-burns 10s ease-out both;
+
+  @keyframes ken-burns {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes spot {
+    0%, 100% { opacity: 0.55; transform: translateX(-4%) scale(1); }
+    50% { opacity: 0.8; transform: translateX(4%) scale(1.05); }
   }
 }
 
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* Poppins es ancha: los títulos van un poco más apretados. */
+@layer base {
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Las animaciones de entrada del hero esperan a que se abra el telón (components/curtain-stage.tsx). */
+body:has(#curtain:not([data-opened])) .curtain-reveal {
+  animation-play-state: paused;
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: var(--color-foreground);
+}
+
+@utility text-accent-gradient {
+  background: linear-gradient(100deg, var(--color-accent-200), var(--color-accent-400) 50%, var(--color-brand-300));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pliegues de telón: bandas verticales de terciopelo con luz y sombra. */
+@utility bg-curtain {
+  background:
+    linear-gradient(to bottom, transparent 70%, rgb(0 0 0 / 0.55)),
+    repeating-linear-gradient(
+      90deg,
+      var(--color-brand-900) 0px,
+      var(--color-brand-600) 22px,
+      var(--color-brand-500) 34px,
+      var(--color-brand-700) 52px,
+      var(--color-brand-900) 70px
+    );
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
