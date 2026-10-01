@@ -9,12 +9,12 @@
   --color-foreground: #eef3fb;
   --color-muted: #94a3bf;
 
-  --color-brand-300: #8fb0f7;
-  --color-brand-400: #3f73e6;
-  --color-brand-500: #2556c9;
-  --color-brand-600: #1c43a3;
-  --color-brand-700: #15327a;
-  --color-brand-900: #0a1838;
+  --color-brand-300: #8ab8ff;
+  --color-brand-400: #3d8bff;
+  --color-brand-500: #0069fe; /* azul del logo RA */
+  --color-brand-600: #0054cc;
+  --color-brand-700: #003f99;
+  --color-brand-900: #001a45;
 
   --color-accent-200: #c9eeff;
   --color-accent-300: #7dd3fc;

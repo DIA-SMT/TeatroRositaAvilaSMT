@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Drama } from "lucide-react";
+import logoRA from "@/public/logo-ra-256.webp";
 import { cn } from "@/lib/utils";
 
 export function Logo({ className, onClick }: { className?: string; onClick?: () => void }) {
@@ -10,9 +11,14 @@ export function Logo({ className, onClick }: { className?: string; onClick?: () 
       className={cn("group flex items-center gap-3", className)}
       aria-label="Teatro Rosita Ávila, inicio"
     >
-      <span className="grid size-10 place-items-center rounded-full border border-accent-400/50 bg-brand-700/40 text-accent-300 transition-colors group-hover:bg-brand-600/60">
-        <Drama className="size-5" strokeWidth={1.6} />
-      </span>
+      <Image
+        src={logoRA}
+        alt=""
+        width={40}
+        height={40}
+        priority
+        className="size-10 rounded-lg shadow-lg shadow-brand-500/30 transition-transform duration-300 group-hover:scale-105"
+      />
       <span className="flex flex-col leading-none">
         <span className="text-[10px] font-medium tracking-[0.35em] text-accent-400 uppercase">Teatro Municipal</span>
         <span className="font-display text-xl font-semibold">Rosita Ávila</span>

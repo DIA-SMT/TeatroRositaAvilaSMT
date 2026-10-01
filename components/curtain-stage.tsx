@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown, MapPin, Phone, Ticket } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import logoRA from "@/public/logo-ra-256.webp";
 import { CURTAIN_CLOSE_PX as CLOSE_PX, CURTAIN_OPEN_PX as OPEN_PX } from "@/lib/curtain";
 import { nav, site } from "@/lib/site";
 
@@ -106,6 +107,14 @@ export function CurtainStage() {
 
       {/* Telón cerrado al cargar la home */}
       <div className="absolute inset-0 hidden flex-col items-center justify-center px-6 text-center opacity-[clamp(0,calc((var(--p)-0.55)*2.5),1)] group-data-[phase=intro]/curtain:flex group-data-[state=closed]/curtain:pointer-events-auto">
+        <Image
+          src={logoRA}
+          alt=""
+          width={96}
+          height={96}
+          priority
+          className="mb-6 size-20 rounded-2xl shadow-2xl shadow-black/50 sm:size-24"
+        />
         <p className="text-xs font-semibold tracking-[0.4em] text-accent-300 uppercase">Teatro Municipal</p>
         <p className="mt-3 font-display text-5xl font-semibold sm:text-7xl">
           Rosita <span className="text-accent-gradient italic">Ávila</span>

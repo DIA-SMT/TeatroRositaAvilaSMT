@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: `${site.name} | ${site.city}`, template: `%s | ${site.name}` },
   description: site.description,
-  icons: { icon: "/logoMuni-sm.png" },
   openGraph: {
     type: "website",
     locale: "es_AR",

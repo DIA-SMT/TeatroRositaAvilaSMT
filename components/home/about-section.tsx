@@ -13,7 +13,7 @@ const features = [
 export function AboutSection() {
   return (
     <section className="relative overflow-hidden py-24">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_0%_50%,rgb(37_86_201/0.18),transparent_60%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_0%_50%,rgb(0_105_254/0.18),transparent_60%)]" />
       <div className="mx-auto grid max-w-7xl gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
         <div>
           <SectionHeading
